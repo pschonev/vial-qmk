@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "features/achordion.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -41,8 +42,20 @@ LAYOUT(
 )
 };
 
+
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  if (!process_achordion(keycode, record)) { return false; }
+  // Your macros ...
+
+  return true;
+}
+
+void matrix_scan_user(void) {
+  achordion_task();
+}

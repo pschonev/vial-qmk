@@ -15,3 +15,4 @@ COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = no
 RGB_MATRIX_ENABLE = no
 EXTRAFLAGS += -flto
+SRC += features/achordion.c
