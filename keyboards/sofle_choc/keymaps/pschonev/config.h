@@ -17,6 +17,7 @@
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define SPLIT_USB_DETECT
+#define ACHORDION_STREAK
 
 // Vial Support
 #define VIAL_KEYBOARD_UID \
@@ -27,3 +28,5 @@
     { 0, 5, 3, 8 }
 #define VIAL_UNLOCK_COMBO_COLS \
     { 0, 0, 0, 0 }
+
+
