@@ -29,4 +29,8 @@
 #define VIAL_UNLOCK_COMBO_COLS \
     { 0, 0, 0, 0 }
 
+#define DYNAMIC_KEYMAP_MACRO_COUNT 30
 
+#define PERMISSIVE_HOLD
+#define RETRO_TAPPING
+#define TAPPING_TERM 200
