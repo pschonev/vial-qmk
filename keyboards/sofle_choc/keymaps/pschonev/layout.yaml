@@ -1,0 +1,37 @@
+# parsed and then tweaked from https://github.com/LOWPROKB/zmk-config-zen-2/blob/main/config/corneish_zen.keymap
+layout:
+  qmk_keyboard: sofle_choc
+layers:
+  DEFAULT:
+    - [Screen, 1, 2, 3, 4, 5]
+    - [6, 7, 8, 9, 0, Screen]
+    - ["TG\n(NAV)", B, L , D, G, V]
+    - [K, F, U, '"', "'", Ctrl]
+    - [Shift, N, R, T, {t: S, h: Shift}, C]
+    - [Y, {t: H, h: Shift}, I, A, O, Shift]
+    - [Gui, {t: Q, h: Gui}, {t: X, h: Ctrl}, {t: M, h: Alt}, W, Z, Volume]
+    - ["Virtual\nDesktop", J, P, {t: ".", h: Gui}, {t: "-", h: Ctrl}, {t: ";", h: Alt}, "TG\n(QWERTY)"]
+    - [Ctrl, Esc, {t: Tab, h: LT(NAV)}, {t: Space, h: LT(SYM)}, Enter]
+    - [{t: Space, h: TG(NAV)}, {t: E, h: LT(SYM)}, {t: Bksp, h: LT(NAV)}, Del, Alt]
+  SYM:
+    - [Screen, 1, 2, 3, 4, 5]
+    - [6, 7, 8, 9, 0, Screen]
+    - ["TG\n(NAV)", "&", "[", "]", 2, 3]
+    - [4, 5, "{", "}", "|", Ctrl]
+    - [Shift, "@", "(", ")", "!", 0]
+    - [1, "=", ":", "_", "#", Shift]
+    - [Gui, "^", "<", ">", "+", "*", Media]
+    - ["Zoom", "\\", "/", "$", "~", "`", "TG\n(QWERTY)"]
+    - [Ctrl, Esc, Tab, Space, Enter]
+    - ["%", "?", Bksp, Del, Alt]
+  NAV:
+    - [Screen, 1, 2, 3, 4, 5]
+    - [6, 7, 8, 9, 0, Screen]
+    - ["TG\n(DEF)", "", "", "Re-Open\nTab", "", Paste]
+    - ["", "Up", "Ü", "", "", "TG\n(DEF)"]
+    - [Shift, Select, Refresh, "New\nTab", "ß", Copy]
+    - ["Left", "Down", "Right", "ä", "ö", Shift]
+    - [Gui, "", Cut, Redo, "Close\nTab", Undo, Media]
+    - [Zoom, "", "", "", "", "", ""]
+    - [Ctrl, Esc, Tab, Space, Enter]
+    - ["%", "?", Bksp, Del, Alt]
