@@ -75,7 +75,7 @@ bool process_achordion(uint16_t keycode, keyrecord_t* record);
 /**
  * Matrix task function for Achordion.
  *
- * Call this function from `matrix_scan_user()` as
+ * Call this function from `()` as
  *
  *     void matrix_scan_user(void) {
  *       achordion_task();
