@@ -14,7 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "sendstring_us_international.h"
 #include "features/achordion.h"
+
+enum custom_keycode {
+  M_QUOT = QK_KB_0,
+  M_DQUOT,
+  M_LNAV,
+  M_RNAV,
+  M_UPNAV,
+  M_SCREEN
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -34,11 +44,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 LAYOUT(
-    KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,     KC_7,     KC_8,    KC_9,    KC_0,    KC_GRV,
-    KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,     KC_U,     KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,     KC_J,     KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,   KC_MPLY,KC_N,     KC_M,     KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                      KC_LCTL, KC_LGUI, KC_LCMD, KC_LALT, KC_ENT,    KC_SPC, KC_RALT,  KC_RCMD,  KC_RGUI, KC_RCTL
+    KC_GRAVE,  M_SCREEN, KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    M_SCREEN,
+    TG(2),   KC_B,    KC_L,    KC_D,    KC_G,    KC_V,                      KC_K,    KC_F,    KC_U,    KC_DQUO, KC_QUOT, KC_LCTL,
+    KC_LSFT,   KC_N,    KC_R,    KC_T,    LSFT(KC_S), KC_C,                      KC_Y,    LSFT(KC_H), KC_I,    KC_A,    KC_O,    KC_RSFT,
+    KC_LGUI,   LGUI(KC_Q), LCTL(KC_X), LALT(KC_M), KC_W, KC_Z, KC_MPLY, M_UPNAV, KC_J,    KC_P,    LALT(KC_DOT),LCTL(KC_MINS),LGUI(KC_SCLN), TG(3),
+    KC_LCTL,   KC_ESC,  LT(2,KC_TAB), LT(1,KC_SPC), KC_ENT,               KC_COMMA, LT(1,KC_E), LT(2,KC_BSPC), KC_DEL,  KC_LALT
 )
 };
 
@@ -49,12 +59,58 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
-  // Your macros ...
 
+  switch (keycode) {
+    case M_QUOT:
+      if (record->event.pressed) { 
+        SEND_STRING("'");
+      }
+      return false;
+    case M_DQUOT:
+      if (record->event.pressed) { 
+        SEND_STRING("\"");
+      }
+      return false;
+    case M_LNAV:
+      if (record->event.pressed) {
+        register_code(KC_LCTL); 
+        tap_code(KC_LEFT); 
+        unregister_code(KC_LCTL);
+      }
+      return false;
+    case M_RNAV: 
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        tap_code(KC_RIGHT);
+        unregister_code(KC_LCTL);
+      }
+      return false;
+    case M_UPNAV:
+      if (record->event.pressed) {
+        register_code(KC_LCTL); 
+        tap_code(KC_UP);       
+        unregister_code(KC_LCTL); 
+      }
+      return false;
+    case M_SCREEN:
+      if (record->event.pressed) {
+        // Start of the screenshot macro
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_4);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LGUI);
+        // End of the screenshot macro
+      }
+      return false;
+    // More macros...
+  }
   return true;
 }
+
 
 void matrix_scan_user(void) {
   achordion_task();
